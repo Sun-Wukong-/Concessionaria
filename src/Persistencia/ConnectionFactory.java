@@ -14,7 +14,7 @@ public class ConnectionFactory {
             Class.forName("com.mysql.jdbc.Driver");   		
             return
             DriverManager.getConnection("jdbc:mysql://localhost/concessionariadb",
-            "root","");
+            "root","Taizai");
         } catch (ClassNotFoundException e) {
             throw new SQLException(e.getMessage());
         }

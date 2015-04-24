@@ -6,24 +6,12 @@ package Modelo;
  */
 public class Produto {
     
-    //Construtor Pessoa
-    Produto(long cod, String c, String m, String mod, int a, double p){
-        codigo = cod;
-        cor = c;
-        marca = m;
-        modelo = mod;
-        ano = a;
-        preco = p;
-        
-    }
-    
     private long codigo; 
     private String cor;
     private String marca;
     private String modelo;
     private int ano;
     private double preco;
-
 
     /**
      * @return the cor

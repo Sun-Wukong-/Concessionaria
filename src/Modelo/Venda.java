@@ -6,40 +6,40 @@ package Modelo;
  */
 public class Venda {
     
-    private long identificadorVenda;
-    private String dataVenda;
+    private long codigo;
+    private String data;
     private long registroVendedor;
     private long códigoProduto; 
-    private float descontoVenda;
-    private float valorAcessórios;
-    private float valorTotalVenda;
+    private double desconto;
+    private double valorAcessórios;
+    private double valorTotal;
 
     /**
-     * @return the identificadorVenda
+     * @return the codigo
      */
-    public long getIdentificadorVenda() {
-        return identificadorVenda;
+    public long getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param identificadorVenda the identificadorVenda to set
+     * @param codigo the codigo to set
      */
-    public void setIdentificadorVenda(long identificadorVenda) {
-        this.identificadorVenda = identificadorVenda;
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the dataVenda
+     * @return the data
      */
-    public String getDataVenda() {
-        return dataVenda;
+    public String getData() {
+        return data;
     }
 
     /**
-     * @param dataVenda the dataVenda to set
+     * @param data the data to set
      */
-    public void setDataVenda(String dataVenda) {
-        this.dataVenda = dataVenda;
+    public void setData(String data) {
+        this.data = data;
     }
 
     /**
@@ -71,46 +71,52 @@ public class Venda {
     }
 
     /**
-     * @return the descontoVenda
+     * @return the desconto
      */
-    public float getDescontoVenda() {
-        return descontoVenda;
+    public double getDesconto() {
+        return desconto;
     }
 
     /**
-     * @param descontoVenda the descontoVenda to set
+     * @param desconto the desconto to set
      */
-    public void setDescontoVenda(float descontoVenda) {
-        this.descontoVenda = descontoVenda;
+    public void setDesconto(double desconto) {
+        this.desconto = desconto;
     }
 
     /**
      * @return the valorAcessórios
      */
-    public float getValorAcessórios() {
+    public double getValorAcessórios() {
         return valorAcessórios;
     }
 
     /**
      * @param valorAcessórios the valorAcessórios to set
      */
-    public void setValorAcessórios(float valorAcessórios) {
+    public void setValorAcessórios(double valorAcessórios) {
         this.valorAcessórios = valorAcessórios;
     }
 
     /**
-     * @return the valorTotalVenda
+     * @return the valorTotal
      */
-    public float getValorTotalVenda() {
-        return valorTotalVenda;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
     /**
-     * @param valorTotalVenda the valorTotalVenda to set
+     * @param valorTotal the valorTotal to set
      */
-    public void setValorTotalVenda(float valorTotalVenda) {
-        this.valorTotalVenda = valorTotalVenda;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
-
+    
+   //Cãlculo Valor Total
+    public void CalculoValorTotal(double produto,float desconto, float acessorio){
+        
+        setValorTotal (produto + acessorio);
+        setValorTotal (getValorTotal() - desconto);
+    }
     
 }

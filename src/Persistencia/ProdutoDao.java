@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Year;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,14 +14,14 @@ import javax.swing.JOptionPane;
  */
 public class ProdutoDao {
     
-    	private Connection connection;
+    	private final Connection connection;
 	
 	// Conecção
 	public ProdutoDao() throws SQLException {
 		this.connection = ConnectionFactory.getConnection();
-	}	
-	
-	 //Adicionar no BD
+	}
+        
+    //Adicionar no BD
    public void adicionar(Produto produto) {
        ProdutoFrame alunoFrame = new ProdutoFrame();
         String sql = "insert into produto " +
@@ -30,18 +29,19 @@ public class ProdutoDao {
              " values (?,?,?,?,?)";
  
         try {
-            // prepared statement para inserção
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            // seta os valores
-            stmt.setString(1,produto.getModelo());
-            stmt.setString(2,produto.getMarca());
-            stmt.setInt(3, produto.getAno());
-            stmt.setString(4,produto.getCor());
-            stmt.setDouble(5,produto.getPreco());
-              
-            // executa
-            stmt.execute();
-            stmt.close();
+           // seta os valores
+           try ( // prepared statement para inserção
+                   PreparedStatement stmt = connection.prepareStatement(sql)) {
+               // seta os valores
+               stmt.setString(1,produto.getModelo());
+               stmt.setString(2,produto.getMarca());
+               stmt.setInt(3, produto.getAno());
+               stmt.setString(4,produto.getCor());
+               stmt.setDouble(5,produto.getPreco());
+               
+               // executa
+               stmt.execute();
+           }
         }catch (SQLException e) {
             throw new RuntimeException(e);
         } 
@@ -53,16 +53,16 @@ public class ProdutoDao {
             "where codigoProduto=? ";
         
         try {
-         PreparedStatement stmt = connection
-            .prepareStatement(sql);
-            stmt.setString(1,produto.getModelo());
-            stmt.setString(2,produto.getMarca());
-            stmt.setInt(3, produto.getAno());
-            stmt.setString(4,produto.getCor());
-            stmt.setDouble(5,produto.getPreco());
-            stmt.setLong(6, produto.getCodigo());
-            stmt.executeUpdate();
-            stmt.close();
+            try (PreparedStatement stmt = connection
+                    .prepareStatement(sql)) {
+                stmt.setString(1,produto.getModelo());
+                stmt.setString(2,produto.getMarca());
+                stmt.setInt(3, produto.getAno());
+                stmt.setString(4,produto.getCor());
+                stmt.setDouble(5,produto.getPreco());
+                stmt.setLong(6, produto.getCodigo());
+                stmt.executeUpdate();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }   
@@ -72,7 +72,7 @@ public class ProdutoDao {
     public void remover(Produto produto, int id) {
         try {
              PreparedStatement stmt = connection
-                     .prepareStatement("delete from aluno where codigoProduto=?");
+                     .prepareStatement("delete from produto where codigoProduto=?");
              stmt.setInt(1, id);
              stmt.execute();
              stmt.close();
