@@ -56,7 +56,6 @@ public class VendaFrame extends javax.swing.JFrame {
         jTextFieldDesconto = new javax.swing.JTextField();
         jLabelValorAcessorio = new javax.swing.JLabel();
         jTextFieldValorAcessorio = new javax.swing.JTextField();
-        jLabelvalorProduto = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableVenda = new javax.swing.JTable();
 
@@ -211,8 +210,6 @@ public class VendaFrame extends javax.swing.JFrame {
 
         jLabelValorAcessorio.setText("Valor de Acessóios");
 
-        jLabelvalorProduto.setText("Valor Produto");
-
         javax.swing.GroupLayout jPanelBodyAulaLayout = new javax.swing.GroupLayout(jPanelBodyAula);
         jPanelBodyAula.setLayout(jPanelBodyAulaLayout);
         jPanelBodyAulaLayout.setHorizontalGroup(
@@ -220,35 +217,32 @@ public class VendaFrame extends javax.swing.JFrame {
             .addGroup(jPanelBodyAulaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelProduto)
+                    .addComponent(jLabelData))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooserVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelDesconto)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBodyAulaLayout.createSequentialGroup()
-                        .addGroup(jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelProduto)
-                            .addComponent(jLabelData))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooserVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelDesconto)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelValorAcessorio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelBodyAulaLayout.createSequentialGroup()
-                                .addComponent(jLabelValorAcessorio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldValorAcessorio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelBodyAulaLayout.createSequentialGroup()
-                                .addComponent(jLabelRegistroVendedor)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldRegistroVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabelvalorProduto))
-                .addContainerGap(263, Short.MAX_VALUE))
+                        .addComponent(jTextFieldValorAcessorio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBodyAulaLayout.createSequentialGroup()
+                        .addComponent(jLabelRegistroVendedor)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldRegistroVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
         jPanelBodyAulaLayout.setVerticalGroup(
             jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBodyAulaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBodyAulaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelBodyAulaLayout.createSequentialGroup()
                         .addComponent(jLabelData)
@@ -264,10 +258,7 @@ public class VendaFrame extends javax.swing.JFrame {
                     .addComponent(jLabelDesconto)
                     .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelValorAcessorio)
-                    .addComponent(jTextFieldValorAcessorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabelvalorProduto)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextFieldValorAcessorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jScrollPane2.setBackground(new java.awt.Color(204, 204, 204));
@@ -305,7 +296,7 @@ public class VendaFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelTituloVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelMenuVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelBodyAula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
+            .addComponent(jPanelBodyAula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
@@ -315,9 +306,9 @@ public class VendaFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelMenuVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelBodyAula, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelBodyAula, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
         );
 
         pack();
@@ -429,7 +420,6 @@ public class VendaFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelProduto;
     private javax.swing.JLabel jLabelRegistroVendedor;
     private javax.swing.JLabel jLabelValorAcessorio;
-    private javax.swing.JLabel jLabelvalorProduto;
     private javax.swing.JPanel jPanelBodyAula;
     private javax.swing.JPanel jPanelMenuVenda;
     private javax.swing.JPanel jPanelTituloVenda;

@@ -5,6 +5,7 @@
  */
 package Visao;
 
+import Controle.PesquisaControle;
 import Persistencia.PesquisaDao;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -38,12 +39,17 @@ public class PesquisaFrame extends javax.swing.JFrame {
         jPanelMenuPesquisa = new javax.swing.JPanel();
         ToolBarMenuPesquisa = new javax.swing.JToolBar();
         jButtonConsultar = new javax.swing.JButton();
+        jButtonConsultarData = new javax.swing.JButton();
+        jButtonConsultarVenda = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButtonLimpar = new javax.swing.JButton();
         jPanelBodyPesquisa = new javax.swing.JPanel();
         jComboBoxRegistroVendedor = new javax.swing.JComboBox();
         jComboBoxDataVenda = new javax.swing.JComboBox();
         jComboBoxVenda = new javax.swing.JComboBox();
+        jPanelBasicas = new javax.swing.JPanel();
+        jScrollPanelBasicas = new javax.swing.JScrollPane();
+        jTableBasicas = new javax.swing.JTable();
         jPanelAdicionais = new javax.swing.JPanel();
         jScrollPanelAdicionais = new javax.swing.JScrollPane();
         jTableAdicionais = new javax.swing.JTable();
@@ -84,7 +90,7 @@ public class PesquisaFrame extends javax.swing.JFrame {
         ToolBarMenuPesquisa.setRollover(true);
 
         jButtonConsultar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButtonConsultar.setText("Consultar");
+        jButtonConsultar.setText(" Consultar Vendedor");
         jButtonConsultar.setFocusable(false);
         jButtonConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -94,6 +100,30 @@ public class PesquisaFrame extends javax.swing.JFrame {
             }
         });
         ToolBarMenuPesquisa.add(jButtonConsultar);
+
+        jButtonConsultarData.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButtonConsultarData.setText("Consultar Data");
+        jButtonConsultarData.setFocusable(false);
+        jButtonConsultarData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonConsultarData.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonConsultarData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarDataActionPerformed(evt);
+            }
+        });
+        ToolBarMenuPesquisa.add(jButtonConsultarData);
+
+        jButtonConsultarVenda.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButtonConsultarVenda.setText("Consultar Venda");
+        jButtonConsultarVenda.setFocusable(false);
+        jButtonConsultarVenda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonConsultarVenda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonConsultarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarVendaActionPerformed(evt);
+            }
+        });
+        ToolBarMenuPesquisa.add(jButtonConsultarVenda);
         ToolBarMenuPesquisa.add(jSeparator1);
 
         jButtonLimpar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -129,15 +159,28 @@ public class PesquisaFrame extends javax.swing.JFrame {
         jPanelBodyPesquisa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         jComboBoxRegistroVendedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Registro Vendedor" }));
+        jComboBoxRegistroVendedor.setEnabled(false);
         jComboBoxRegistroVendedor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxRegistroVendedorItemStateChanged(evt);
             }
         });
 
-        jComboBoxDataVenda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Data Venda", " " }));
+        jComboBoxDataVenda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Data Venda" }));
+        jComboBoxDataVenda.setEnabled(false);
+        jComboBoxDataVenda.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxDataVendaItemStateChanged(evt);
+            }
+        });
 
-        jComboBoxVenda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Codigo Venda", " " }));
+        jComboBoxVenda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione Codigo Venda" }));
+        jComboBoxVenda.setEnabled(false);
+        jComboBoxVenda.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxVendaItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBodyPesquisaLayout = new javax.swing.GroupLayout(jPanelBodyPesquisa);
         jPanelBodyPesquisa.setLayout(jPanelBodyPesquisaLayout);
@@ -146,11 +189,11 @@ public class PesquisaFrame extends javax.swing.JFrame {
             .addGroup(jPanelBodyPesquisaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jComboBoxRegistroVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(174, 174, 174)
                 .addComponent(jComboBoxDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addComponent(jComboBoxVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelBodyPesquisaLayout.setVerticalGroup(
             jPanelBodyPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,6 +204,53 @@ public class PesquisaFrame extends javax.swing.JFrame {
                     .addComponent(jComboBoxDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanelBasicas.setBackground(new java.awt.Color(204, 204, 204));
+        jPanelBasicas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações Basicas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+
+        jScrollPanelBasicas.setBackground(new java.awt.Color(204, 204, 204));
+
+        jTableBasicas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTableBasicas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Venda", "Data", "Registro Vendedor", "Codigo Produto", "Desconto", "Valor Acessorio", "Valor Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableBasicas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableBasicasMouseClicked(evt);
+            }
+        });
+        jScrollPanelBasicas.setViewportView(jTableBasicas);
+
+        javax.swing.GroupLayout jPanelBasicasLayout = new javax.swing.GroupLayout(jPanelBasicas);
+        jPanelBasicas.setLayout(jPanelBasicasLayout);
+        jPanelBasicasLayout.setHorizontalGroup(
+            jPanelBasicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPanelBasicas, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        jPanelBasicasLayout.setVerticalGroup(
+            jPanelBasicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPanelBasicas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
         );
 
         jPanelAdicionais.setBackground(new java.awt.Color(204, 204, 204));
@@ -203,11 +293,11 @@ public class PesquisaFrame extends javax.swing.JFrame {
         jPanelAdicionais.setLayout(jPanelAdicionaisLayout);
         jPanelAdicionaisLayout.setHorizontalGroup(
             jPanelAdicionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPanelAdicionais, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPanelAdicionais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1011, Short.MAX_VALUE)
         );
         jPanelAdicionaisLayout.setVerticalGroup(
             jPanelAdicionaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPanelAdicionais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+            .addComponent(jScrollPanelAdicionais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,7 +307,9 @@ public class PesquisaFrame extends javax.swing.JFrame {
             .addComponent(jPanelTituloPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelMenuPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelBodyPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelAdicionais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(jPanelAdicionais, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelBasicas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,29 +320,43 @@ public class PesquisaFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBodyPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelAdicionais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelBasicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelAdicionais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
-
+        try {
+            PesquisaControle controle = new PesquisaControle();
+            controle.PesquisarVendedor(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-         PesquisaControle controle = new PesquisaControle();
-        controle.limparTela(this);
+        try {
+            PesquisaControle controle = new PesquisaControle();
+            controle.limparTela(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
-    private void jTableAdicionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAdicionaisMouseClicked
+    private void jTableBasicasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBasicasMouseClicked
 
-    }//GEN-LAST:event_jTableAdicionaisMouseClicked
+    }//GEN-LAST:event_jTableBasicasMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             PesquisaDao dao = new PesquisaDao();
             dao.preencherComboVendedor(this);
+            dao.preencherComboData(this);
+            dao.preencherComboVenda(this);
         } catch (SQLException ex) {
             Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -259,11 +365,51 @@ public class PesquisaFrame extends javax.swing.JFrame {
     private void jComboBoxRegistroVendedorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxRegistroVendedorItemStateChanged
         try {
             PesquisaDao dao = new PesquisaDao();
-            dao.preencherJTableAdicionais(this);
+            dao.preencherJTableAdicionarVendedor(this);
         } catch (SQLException ex) {
             Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBoxRegistroVendedorItemStateChanged
+
+    private void jTableAdicionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAdicionaisMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableAdicionaisMouseClicked
+
+    private void jComboBoxVendaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxVendaItemStateChanged
+        try {
+            PesquisaDao dao = new PesquisaDao();
+            dao.preencherJTableAdicionarVenda(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBoxVendaItemStateChanged
+
+    private void jComboBoxDataVendaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxDataVendaItemStateChanged
+        try {
+            PesquisaDao dao = new PesquisaDao();
+            dao.preencherJTableAdicionarData(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBoxDataVendaItemStateChanged
+
+    private void jButtonConsultarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarDataActionPerformed
+        try {
+            PesquisaControle controle = new PesquisaControle();
+            controle.PesquisarData(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonConsultarDataActionPerformed
+
+    private void jButtonConsultarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarVendaActionPerformed
+        try {
+            PesquisaControle controle = new PesquisaControle();
+            controle.PesquisarVenda(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(PesquisaFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonConsultarVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,18 +449,23 @@ public class PesquisaFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar ToolBarMenuPesquisa;
     private javax.swing.JButton jButtonConsultar;
+    private javax.swing.JButton jButtonConsultarData;
+    private javax.swing.JButton jButtonConsultarVenda;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JComboBox jComboBoxDataVenda;
     private javax.swing.JComboBox jComboBoxRegistroVendedor;
     private javax.swing.JComboBox jComboBoxVenda;
     private javax.swing.JLabel jLabelTituloPesquisa;
     private javax.swing.JPanel jPanelAdicionais;
+    private javax.swing.JPanel jPanelBasicas;
     private javax.swing.JPanel jPanelBodyPesquisa;
     private javax.swing.JPanel jPanelMenuPesquisa;
     private javax.swing.JPanel jPanelTituloPesquisa;
     private javax.swing.JScrollPane jScrollPanelAdicionais;
+    private javax.swing.JScrollPane jScrollPanelBasicas;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JTable jTableAdicionais;
+    private javax.swing.JTable jTableBasicas;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -371,5 +522,19 @@ public class PesquisaFrame extends javax.swing.JFrame {
      */
     public void setjTableAdicionais(javax.swing.JTable jTableAdicionais) {
         this.jTableAdicionais = jTableAdicionais;
+    }
+
+    /**
+     * @return the jTableBasicas
+     */
+    public javax.swing.JTable getjTableBasicas() {
+        return jTableBasicas;
+    }
+
+    /**
+     * @param jTableBasicas the jTableBasicas to set
+     */
+    public void setjTableBasicas(javax.swing.JTable jTableBasicas) {
+        this.jTableBasicas = jTableBasicas;
     }
 }
