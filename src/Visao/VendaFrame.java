@@ -40,7 +40,6 @@ public class VendaFrame extends javax.swing.JFrame {
         jPanelMenuVenda = new javax.swing.JPanel();
         ToolBarMenuAula = new javax.swing.JToolBar();
         jButtonConsultar = new javax.swing.JButton();
-        jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButtonSalvar = new javax.swing.JButton();
@@ -112,18 +111,6 @@ public class VendaFrame extends javax.swing.JFrame {
             }
         });
         ToolBarMenuAula.add(jButtonConsultar);
-
-        jButtonAlterar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButtonAlterar.setText("Alterar");
-        jButtonAlterar.setFocusable(false);
-        jButtonAlterar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonAlterar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlterarActionPerformed(evt);
-            }
-        });
-        ToolBarMenuAula.add(jButtonAlterar);
 
         jButtonExcluir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jButtonExcluir.setText("Excluir");
@@ -327,10 +314,6 @@ public class VendaFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
-    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-
-    }//GEN-LAST:event_jButtonAlterarActionPerformed
-
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         VendaControle controle = new VendaControle();
         Venda venda = new Venda();
@@ -408,7 +391,6 @@ public class VendaFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelTituloVenda;
     private javax.swing.JToolBar ToolBarMenuAula;
-    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonConsultar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonLimpar;
