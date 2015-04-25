@@ -72,7 +72,7 @@ public class VendaDao {
     public void remover(Venda venda, int id) {
         try {
              PreparedStatement stmt = connection
-                     .prepareStatement("delete from produto where codigoVenda=?");
+                     .prepareStatement("delete from venda where codigoVenda=?");
              stmt.setInt(1, id);
              stmt.execute();
              stmt.close();

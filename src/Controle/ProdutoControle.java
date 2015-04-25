@@ -26,7 +26,7 @@ public class ProdutoControle {
             produtoFrame.getjTextFieldMarca().requestFocus();
             return false;
         }
-        if (produtoFrame.getjTextFieldModelo().getText().equals("")) {
+        if (produtoFrame.getjTextFieldModelo().getText().equals(""))  {
             JOptionPane.showMessageDialog(produtoFrame, "Digite o Modelo");
             produtoFrame.getjTextFieldModelo().requestFocus();
             return false;
@@ -59,24 +59,36 @@ public class ProdutoControle {
     }
     
     //Gravar no BD
-    public void Inserir(ProdutoFrame produtoFrame) throws SQLException {
+    public boolean Inserir(ProdutoFrame produtoFrame) throws SQLException {
         Produto produto = new Produto();
         produto.setMarca(produtoFrame.getjTextFieldMarca().getText());
         produto.setModelo(produtoFrame.getjTextFieldModelo().getText());
-        produto.setAno(Integer.parseInt(produtoFrame.getjTextFieldAno().getText()));
+        try{
+            produto.setAno(Integer.parseInt(produtoFrame.getjTextFieldAno().getText()));
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(produtoFrame, "Erro Formato Campo Ano");
+            return false;
+        }
         produto.setCor(produtoFrame.getjTextFieldCor().getText());
-        produto.setPreco(Double.parseDouble(produtoFrame.getjTextFieldPreco().getText()));
+        try{
+            produto.setPreco(Double.parseDouble(produtoFrame.getjTextFieldPreco().getText()));
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(produtoFrame, "Erro Formato Campo Preço");
+            return false;
+        }
         ProdutoDao dao = new ProdutoDao();
         dao.adicionar(produto);
+        return true;
     }
     
         //Metodo para Salvar Campos após Verificação
     public void salvarCampos(ProdutoFrame produtoFrame) throws SQLException {
         if (validarCampos(produtoFrame)) {
-            Inserir(produtoFrame);
-            JOptionPane.showMessageDialog(produtoFrame, "Cadastro Salvo com Sucesso");
-            limparTela(produtoFrame);
-            consultar(produtoFrame);
+            if(Inserir(produtoFrame)){
+                JOptionPane.showMessageDialog(produtoFrame, "Cadastro Salvo com Sucesso");
+                limparTela(produtoFrame);
+                consultar(produtoFrame);
+            }
         }
     }
     

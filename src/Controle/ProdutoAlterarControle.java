@@ -63,9 +63,20 @@ public class ProdutoAlterarControle {
             produto.setCodigo(Integer.parseInt(produtoFrame.getjComboBoxCodigo().getSelectedItem().toString()));
             produto.setMarca(produtoFrame.getjTextFieldMarca().getText());
             produto.setModelo(produtoFrame.getjTextFieldModelo().getText());
-            produto.setAno(Integer.parseInt(produtoFrame.getjTextFieldAno().getText()));
+            try{
+                produto.setAno(Integer.parseInt(produtoFrame.getjTextFieldAno().getText()));
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(produtoFrame, "Erro Formato Campo Ano");
+                return;
+                
+            }
             produto.setCor(produtoFrame.getjTextFieldCor().getText());
+            try{
             produto.setPreco(Double.parseDouble(produtoFrame.getjTextFieldPreco().getText()));
+            }catch(NumberFormatException e){
+               JOptionPane.showMessageDialog(produtoFrame, "Erro Formato Campo Preço");
+                return; 
+            }
             test = true;
             if(test){
                 ProdutoDao dao = new ProdutoDao();

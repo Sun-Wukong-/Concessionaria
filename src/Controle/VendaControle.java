@@ -59,25 +59,47 @@ public class VendaControle {
     }
     
     //Gravar no BD
-    public void Inserir(VendaFrame vendaFrame) throws SQLException {
+    public boolean Inserir(VendaFrame vendaFrame) throws SQLException {
         Venda venda = new Venda();
-        VendaDao dao = new VendaDao();
-        venda.setData(((JTextField)vendaFrame.getjDateChooserVenda().getDateEditor().getUiComponent()).getText());
-        venda.setRegistroVendedor(Long.parseLong(vendaFrame.getjTextFieldRegistroVendedor().getText()));
-        venda.setDesconto(Double.parseDouble(vendaFrame.getjTextFieldDesconto().getText()));
-        venda.setValorAcessórios(Double.parseDouble(vendaFrame.getjTextFieldValorAcessorio().getText()));
+        try{
+            venda.setData(((JTextField)vendaFrame.getjDateChooserVenda().getDateEditor().getUiComponent()).getText());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(vendaFrame, "Erro Formato Campo Data");
+            return false;
+        }
+        try{
+            venda.setRegistroVendedor(Long.parseLong(vendaFrame.getjTextFieldRegistroVendedor().getText()));
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(vendaFrame, "Erro Formato Campo Registro Vendedor");
+            return false;
+        }
+        try{
+            venda.setDesconto(Double.parseDouble(vendaFrame.getjTextFieldDesconto().getText()));
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(vendaFrame, "Erro Formato Campo Desconto");
+            return false;
+        }
+        try{
+            venda.setValorAcessórios(Double.parseDouble(vendaFrame.getjTextFieldValorAcessorio().getText()));
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(vendaFrame, "Erro Formato Campo Valor Acessorio");
+            return false;
+        }
         venda.setCódigoProduto(Long.parseLong(vendaFrame.getjComboBoxProduto().getSelectedItem().toString()));
-
+        
+        VendaDao dao = new VendaDao();
         dao.adicionar(venda);
+        return true;
     }
     
         //Metodo para Salvar Campos após Verificação
     public void salvarCampos(VendaFrame vendaFrame) throws SQLException {
         if (validarCampos(vendaFrame)) {
-            Inserir(vendaFrame);
-            JOptionPane.showMessageDialog(vendaFrame, "Cadastro Salvo com Sucesso");
-            limparTela(vendaFrame);
-            consultar(vendaFrame);
+            if(Inserir(vendaFrame)){
+                JOptionPane.showMessageDialog(vendaFrame, "Cadastro Salvo com Sucesso");
+                limparTela(vendaFrame);
+                consultar(vendaFrame);
+            }
         }
     }
     

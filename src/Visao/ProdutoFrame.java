@@ -261,7 +261,7 @@ public class ProdutoFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CodigoCarro", "Marca", "Modelo", "Ano", "Cor", "Preço"
+                "Codigo Carro", "Marca", "Modelo", "Ano", "Cor", "Preço"
             }
         ) {
             Class[] types = new Class [] {

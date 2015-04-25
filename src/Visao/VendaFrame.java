@@ -262,7 +262,7 @@ public class VendaFrame extends javax.swing.JFrame {
         );
 
         jScrollPane2.setBackground(new java.awt.Color(204, 204, 204));
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabela Aula", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vendas Cadastradas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         jTableVenda.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTableVenda.setModel(new javax.swing.table.DefaultTableModel(
@@ -270,7 +270,7 @@ public class VendaFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CodigoVenda", "Registro Vendedor", "Data", "CodigoProduto", "Desconto", "Valor Acessorios", "Valor Total"
+                "Codigo Venda", "Registro Vendedor", "Data", "Codigo Produto", "Desconto", "Valor Acessorios", "Valor Total"
             }
         ) {
             Class[] types = new Class [] {
