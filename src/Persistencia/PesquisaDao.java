@@ -21,6 +21,7 @@ public class PesquisaDao {
 		this.connection = ConnectionFactory.getConnection();
 	}
     
+    //Limpa as Linhas da Tabela    
     public void limparJtable(PesquisaFrame pesquisaFrame){
         try{
 

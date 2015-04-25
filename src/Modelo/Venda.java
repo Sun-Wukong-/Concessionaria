@@ -12,7 +12,6 @@ public class Venda {
     private long códigoProduto; 
     private double desconto;
     private double valorAcessórios;
-    private double valorTotal;
 
     /**
      * @return the codigo
@@ -97,26 +96,4 @@ public class Venda {
     public void setValorAcessórios(double valorAcessórios) {
         this.valorAcessórios = valorAcessórios;
     }
-
-    /**
-     * @return the valorTotal
-     */
-    public double getValorTotal() {
-        return valorTotal;
-    }
-
-    /**
-     * @param valorTotal the valorTotal to set
-     */
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-    
-   //Cãlculo Valor Total
-    public void CalculoValorTotal(double produto,float desconto, float acessorio){
-        
-        setValorTotal (produto + acessorio);
-        setValorTotal (getValorTotal() - desconto);
-    }
-    
 }

@@ -217,14 +217,14 @@ public class PesquisaFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Venda", "Data", "Registro Vendedor", "Codigo Produto", "Desconto", "Valor Acessorio", "Valor Total"
+                "Codigo Venda", "Registro Vendedor", "Data", "Codigo Produto", "Desconto", "Valor Acessorio", "Valor Total"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

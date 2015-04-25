@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -46,29 +45,8 @@ public class VendaDao {
             throw new RuntimeException(e);
         } 
     }
-   
-     //Alterar BD
-    public void alterar(Venda venda) {
-        String sql = "update produto set data=?, codigoVendedor=? , desconto=?, valorAcessorio=?, valorTotal=?,Produto_codigoProduto=? "+
-            "where codigoVenda=? ";
-        
-        try {
-            try (PreparedStatement stmt = connection
-                    .prepareStatement(sql)) {
-               stmt.setString(1,venda.getData());
-               stmt.setLong(2,venda.getRegistroVendedor());
-               stmt.setDouble(3, venda.getDesconto());
-               stmt.setDouble(4,venda.getValorAcessórios());
-               stmt.setDouble(5,venda.getValorTotal());
-               stmt.setLong(6, venda.getCódigoProduto());
-               stmt.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }   
-    }
     
-    //Remover BD
+    //Remover do BD
     public void remover(Venda venda, int id) {
         try {
              PreparedStatement stmt = connection
@@ -90,7 +68,7 @@ public class VendaDao {
             String sql;
             sql = "select codigoVenda as CodigoVenda, codigoVendedor as RegistroVendedor, data as Data, Produto_codigoProduto as CodigoProduto, desconto as Desconto, valorAcessorio as ValorAcessorio, "
                     + "( produto.preco + venda.valorAcessorio - venda.desconto "
-                    + ") as ValorTotal "
+                    + ") as ValorTotal " //Calculo do Valor Total
                     + "from venda,produto where codigoProduto = Produto_codigoProduto";
 
             pst = connection.prepareStatement(sql);
@@ -101,7 +79,8 @@ public class VendaDao {
         }
        return rs;
     }
-    
+   
+    //Prrenche ComboBox com Código de Produto
     public void preencherComboCodigo(VendaFrame vendaFrame){
             try {
                 String sql = "select * from produto order by codigoProduto";
