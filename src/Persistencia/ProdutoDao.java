@@ -47,6 +47,31 @@ public class ProdutoDao {
         } 
     }
    
+      public void adicionar2(Produto produto) {
+       ProdutoFrame alunoFrame = new ProdutoFrame();
+        String sql = "insert into produtoF " +
+             "(modelo,marca,ano,cor,preco)" +
+             " values (?,?,?,?,?)";
+ 
+        try {
+           // seta os valores
+           try ( // prepared statement para inserção
+                   PreparedStatement stmt = connection.prepareStatement(sql)) {
+               // seta os valores
+               stmt.setString(1,produto.getModelo());
+               stmt.setString(2,produto.getMarca());
+               stmt.setInt(3, produto.getAno());
+               stmt.setString(4,produto.getCor());
+               stmt.setDouble(5,produto.getPreco());
+               
+               // executa
+               stmt.execute();
+           }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        } 
+    }
+   
      //Alterar BD
     public void alterar(Produto produto) {
         String sql = "update produto set modelo=?, marca=? , ano=?, cor=?, preco=? "+
@@ -68,11 +93,30 @@ public class ProdutoDao {
         }   
     }
     
+        //Alterar BD
+    public void alterar2(Produto produto) {
+        String sql = "update produtoF set modelo=?, marca=? , ano=?, cor=?, preco=? "+
+            "where codigoProduto=? ";
+        
+        try {
+            try (PreparedStatement stmt = connection
+                    .prepareStatement(sql)) {
+                stmt.setString(1,produto.getModelo());
+                stmt.setString(2,produto.getMarca());
+                stmt.setInt(3, produto.getAno());
+                stmt.setString(4,produto.getCor());
+                stmt.setDouble(5,produto.getPreco());
+                stmt.setLong(6, produto.getCodigo());
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }   
+    }
     //Remover BD
     public void remover(Produto produto, int id) {
         try {
-             PreparedStatement stmt = connection
-                     .prepareStatement("delete from produto where codigoProduto=?");
+             PreparedStatement stmt = connection.prepareStatement("delete from produtoF where codigoProduto=?");
              stmt.setInt(1, id);
              stmt.execute();
              stmt.close();
@@ -88,7 +132,7 @@ public class ProdutoDao {
         
         try {
             String sql;
-            sql = "select codigoProduto as CodigoProduto, marca as Marca, modelo as Modelo, ano as Ano, cor as Cor, preco as Preco from produto";
+            sql = "select codigoProduto as CodigoProduto, marca as Marca, modelo as Modelo, ano as Ano, cor as Cor, preco as Preco from produtoF";
 
             pst = connection.prepareStatement(sql);
             rs = pst.executeQuery();     

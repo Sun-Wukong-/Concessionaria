@@ -78,6 +78,7 @@ public class ProdutoControle {
         }
         ProdutoDao dao = new ProdutoDao();
         dao.adicionar(produto);
+        dao.adicionar2(produto);
         return true;
     }
     

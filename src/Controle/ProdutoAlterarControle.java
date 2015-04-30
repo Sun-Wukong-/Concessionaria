@@ -81,6 +81,7 @@ public class ProdutoAlterarControle {
             if(test){
                 ProdutoDao dao = new ProdutoDao();
                 dao.alterar(produto);
+                dao.alterar2(produto);
                 JOptionPane.showMessageDialog(produtoFrame, "Cadastro Atualizado com Sucesso");
                 limparTela(produtoFrame);
             }

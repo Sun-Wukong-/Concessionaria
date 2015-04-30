@@ -83,7 +83,7 @@ public class VendaDao {
     //Prrenche ComboBox com Código de Produto
     public void preencherComboCodigo(VendaFrame vendaFrame){
             try {
-                String sql = "select * from produto order by codigoProduto";
+                String sql = "select * from produtoF order by codigoProduto";
                 PreparedStatement pst = connection.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
 

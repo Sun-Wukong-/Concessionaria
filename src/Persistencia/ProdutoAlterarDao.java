@@ -22,7 +22,7 @@ public class ProdutoAlterarDao {
     
         public void preencherComboCodigo(ProdutoAlterarFrame produoFrame){
             try {
-                String sql = "select * from produto order by codigoProduto";
+                String sql = "select * from produtoF order by codigoProduto";
                 PreparedStatement pst = connection.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
 
@@ -40,7 +40,7 @@ public class ProdutoAlterarDao {
     public void preencherCodigoText(ProdutoAlterarFrame produtoFrame){
         try{
             String var = produtoFrame.getjComboBoxCodigo().getSelectedItem().toString();
-            String sql = "select marca,modelo,ano,cor,preco from produto where codigoProduto = ?";
+            String sql = "select marca,modelo,ano,cor,preco from produtoF where codigoProduto = ?";
             PreparedStatement pst = connection.prepareStatement(sql);
             pst.setString(1, var);
             ResultSet rs = pst.executeQuery();
