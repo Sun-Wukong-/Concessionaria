@@ -132,7 +132,7 @@ public class ProdutoDao {
         
         try {
             String sql;
-            sql = "select codigoProduto as CodigoProduto, marca as Marca, modelo as Modelo, ano as Ano, cor as Cor, preco as Preco from produtoF";
+            sql = "select codigoProduto as CodigoProduto, marca as Marca, modelo as Modelo, ano as Ano, cor as Cor, preco as Preco from produtoF order by CodigoProduto";
 
             pst = connection.prepareStatement(sql);
             rs = pst.executeQuery();     

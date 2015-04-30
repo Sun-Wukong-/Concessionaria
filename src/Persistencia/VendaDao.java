@@ -69,7 +69,7 @@ public class VendaDao {
             sql = "select codigoVenda as CodigoVenda, codigoVendedor as RegistroVendedor, data as Data, Produto_codigoProduto as CodigoProduto, desconto as Desconto, valorAcessorio as ValorAcessorio, "
                     + "( produto.preco + venda.valorAcessorio - venda.desconto "
                     + ") as ValorTotal " //Calculo do Valor Total
-                    + "from venda,produto where codigoProduto = Produto_codigoProduto";
+                    + "from venda,produto where codigoProduto = Produto_codigoProduto order by CodigoVenda";
 
             pst = connection.prepareStatement(sql);
             rs = pst.executeQuery();     
